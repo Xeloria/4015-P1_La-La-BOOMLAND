@@ -38,7 +38,7 @@ public class MyPanel extends JPanel {
 				colorArray[x][y] = Color.WHITE;
 			}
 		}
-		colorArray[4][0]=Color.BLUE;
+		colorArray[4][0]=Color.BLUE; // New game button
 		
 	}
 	
@@ -68,8 +68,6 @@ public class MyPanel extends JPanel {
 			g.drawLine(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y, x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS - 1)));
 		}
 
-		//Draw an additional cell at the bottom left
-//		g.drawRect(x1 + GRID_X, y1 + GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS - 1)), INNER_CELL_SIZE + 1, INNER_CELL_SIZE + 1);
 
 		//Paint cell colors
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {
@@ -82,6 +80,8 @@ public class MyPanel extends JPanel {
 			}
 		}
 	}
+	
+	
 	public int getGridX(int x, int y) {
 		Insets myInsets = getInsets();
 		int x1 = myInsets.left;
@@ -99,14 +99,16 @@ public class MyPanel extends JPanel {
 		}
 		x = x / (INNER_CELL_SIZE + 1);
 		y = y / (INNER_CELL_SIZE + 1);
-		if (x == 0 && y == TOTAL_ROWS - 1) {    //The lower left extra cell
-			return x;
-		}
-		if (x < 0 || x > TOTAL_COLUMNS - 1 || y < 0 || y > TOTAL_ROWS - 2) {   //Outside the rest of the grid
+//		if (x == 0 && y == TOTAL_ROWS - 1) {    //The lower left extra cell
+//			return x;
+//		}
+		if (x < 0 || x > TOTAL_COLUMNS - 1 || y < 0 || y > TOTAL_ROWS - 1) {   //Outside the rest of the grid
 			return -1;
 		}
 		return x;
 	}
+	
+	
 	public int getGridY(int x, int y) {
 		Insets myInsets = getInsets();
 		int x1 = myInsets.left;
@@ -124,10 +126,12 @@ public class MyPanel extends JPanel {
 		}
 		x = x / (INNER_CELL_SIZE + 1);
 		y = y / (INNER_CELL_SIZE + 1);
-		if (x == 0 && y == TOTAL_ROWS - 1) {    //The lower left extra cell
-			return y;
-		}
-		if (x < 0 || x > TOTAL_COLUMNS - 1 || y < 0 || y > TOTAL_ROWS - 2) {   //Outside the rest of the grid
+		
+//		if (x == 0 && y == TOTAL_ROWS ) {    //The lower left extra cell
+//			return y;
+//		}
+//		
+		if (x < 0 || x > TOTAL_COLUMNS - 1 || y < 0 || y > TOTAL_ROWS - 1) {   //Outside the rest of the grid
 			return -1;
 		}
 		return y;
