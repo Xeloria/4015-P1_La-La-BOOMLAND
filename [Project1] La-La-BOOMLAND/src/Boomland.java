@@ -34,7 +34,7 @@ public class Boomland {
 //				
 //				mineList[mineX][mineY][0]=1;		
 //			}
-			 System.out.println("New game!");
+		 System.out.println("New game!");
 	}
 	
 	
