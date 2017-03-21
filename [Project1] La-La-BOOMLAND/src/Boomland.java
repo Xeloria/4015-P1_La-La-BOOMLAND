@@ -1,29 +1,24 @@
-import java.awt.Color;
 import java.util.Random;
 
 public class Boomland {
 	
-	static int[][][] mineList = new int[9][10][2];
-	
+	static boolean[][][] mineList = new boolean[9][10][3]; 
+	//mineList[x][y][0] = mine/no mine
+	//mineList[x][y][1] = flag/no flag
+	//mineList[x][y][2] = clicked/not clicked
 	private static Random randNum = new Random();
 
-	public static boolean hitMine(int slotX, int slotY){
-		// Determines if the space clicked contins a mine or not.
-		if(mineList[slotX][slotY][0]==1){
-			return true;
-		}
-		return false;
-	}
-	
 	public static void newGame(){
-			
 			int mineX, mineY;
 			
-			for(int i=0;i<8;i++){
-				for(int j=0; i<9;j++){
-					for(int k = 0; k<2;k++){
-					mineList[i][j][k]=0;
+			
+			for(int i=0;i<9;i++){
+				for(int j=0; j<10;j++){
+					for(int k = 0; k<3;k++){
+						
+					mineList[i][j][k]=false;
 					System.out.println("mineList["+i+"]["+j+"]["+k+"] = "+mineList[i][j][k]);
+					
 					}
 				}
 			}
@@ -31,10 +26,11 @@ public class Boomland {
 			for(int m = 0; m<10; m++){
 				
 				mineX = randNum.nextInt(9);
-				mineY = randNum.nextInt(10)+1;
+				mineY = randNum.nextInt(9)+1;
+				mineList[mineX][mineY][0]=true;	
 				
-				mineList[mineX][mineY][0]=1;		
 			}
+			
 		 System.out.println("New game!");
 	}
 	

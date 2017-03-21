@@ -55,7 +55,7 @@ public class MyPanel extends JPanel {
 		int height = y2 - y1;
 
 		//Paint the background
-		g.setColor(Color.BLACK);
+		g.setColor(Color.GRAY);
 		g.fillRect(x1, y1, width + 1, height + 1);
 
 		//Draw the grid minus the bottom row (which has only one cell)

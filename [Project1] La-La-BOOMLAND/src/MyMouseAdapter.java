@@ -79,7 +79,7 @@ public class MyMouseAdapter extends MouseAdapter {
 		colorBank[7] = new Color(153, 0, 0);		// 7 mines
 		colorBank[8] = new Color(102, 0, 0);		// 8 mines
 		colorBank[9] = Color.BLACK;					// BOOM!
-		colorBank[10] = new Color(127, 0, 255);		// Flagged mine
+		colorBank[10] = Color.RED;		// Flagged mine
 		
 		
 		int randomColorInt = generator.nextInt(5);
@@ -120,26 +120,35 @@ public class MyMouseAdapter extends MouseAdapter {
 					} else {
 			
 						if(gridX==4 && gridY==0){
-							
+							// New game button
 									Boomland.newGame();
+									for (int i = 0; i < 9; i++) {   
+										for (int j = 1; j < 10; j++) {
+											myPanel.colorArray[i][j] = Color.WHITE;
+										}
+									}
 									
 						} else {
 							if(gridY!=0){
 								
-								System.out.println("gridX = " + gridX + "; gridY = " + gridY);
-							
-							if(Boomland.hitMine(gridX, gridY)){
+								if(!(Boomland.mineList[gridX][gridY][1])){
 								
-								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[9];
-					
+									System.out.println("gridX = " + gridX + "; gridY = " + gridY);
 								
-							}else {
-								
-								// Open surrounding squares if they do not have a mine nearby
-								// Assing respective colors if a mine is nearby
-								
-								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[0];
-								
+									if(Boomland.mineList[gridX][gridY][0]){
+									
+										myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[9];
+										Boomland.mineList[gridX][gridY][2]=true;
+						
+									
+									}else {
+									
+									// Open surrounding squares if they do not have a mine nearby
+									// Assing respective colors if a mine is nearby
+									
+										myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[0];
+										Boomland.mineList[gridX][gridY][2]=true;
+								}
 							}
 							}
 							myPanel.repaint();
@@ -171,12 +180,28 @@ public class MyMouseAdapter extends MouseAdapter {
 			int gridXR = myPanelR.getGridX(xR, yR);
 			int gridYR = myPanelR.getGridY(xR, yR);
 			
-			if(gridXR < 0 && gridYR < 0){
+			if(gridYR != 0){
 				
-				// Mine flagger.
-				// Change IF statement
+				// Flags
 				
-				
+				if(myPanelR.colorArray[gridXR][gridYR].equals(Color.WHITE)||myPanelR.colorArray[gridXR][gridYR].equals(Color.RED)){
+					
+					if(Boomland.mineList[gridXR][gridYR][1]){
+						
+						myPanelR.colorArray[gridXR][gridYR] = Color.WHITE;
+						Boomland.mineList[gridXR][gridYR][1] = false;
+						System.out.println("Unflagged!");
+						myPanelR.repaint();
+						
+					}else{
+						
+					myPanelR.colorArray[gridXR][gridYR] = colorBank[10];
+					Boomland.mineList[gridXR][gridYR][1] = true;
+					System.out.println("Flagged");
+					myPanelR.repaint();
+					
+					}
+				}
 				
 			}
 				
