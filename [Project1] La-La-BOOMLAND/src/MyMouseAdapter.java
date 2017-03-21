@@ -125,10 +125,13 @@ public class MyMouseAdapter extends MouseAdapter {
 									
 						} else {
 							if(gridY!=0){
+								
+								System.out.println("gridX = " + gridX + "; gridY = " + gridY);
 							
 							if(Boomland.hitMine(gridX, gridY)){
 								
 								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[9];
+					
 								
 							}else {
 								
