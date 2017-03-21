@@ -63,14 +63,24 @@ public class MyMouseAdapter extends MouseAdapter {
 			break;
 		}
 	}
+	
+	
+	
 	public void mouseReleased(MouseEvent e) {
 		
-		Color[] colorBank = new Color[5];
-		colorBank[0] = Color.YELLOW;
-		colorBank[1] = Color.MAGENTA;
-		colorBank[2] =Color.BLACK;
-		colorBank[3] = new Color(0x964B00);
-		colorBank[4] = new Color(0xB57EDC);
+		Color[] colorBank = new Color[11];
+		colorBank[0] = Color.CYAN; 					// No mines
+		colorBank[1] = Color.GREEN;					// 1 mine
+		colorBank[2] = new Color(154, 255, 0);		// 2 mines
+		colorBank[3] =Color.YELLOW;					// 3 mines
+		colorBank[4] =Color.ORANGE;					// 4 mines
+		colorBank[5] = new Color(255, 111, 0);		// 5 mines
+		colorBank[6] = Color.RED;					// 6 mines
+		colorBank[7] = new Color(153, 0, 0);		// 7 mines
+		colorBank[8] = new Color(102, 0, 0);		// 8 mines
+		colorBank[9] = Color.BLACK;					// BOOM!
+		colorBank[10] = new Color(127, 0, 255);		// Flagged mine
+		
 		
 		int randomColorInt = generator.nextInt(5);
 		
@@ -108,155 +118,29 @@ public class MyMouseAdapter extends MouseAdapter {
 						//Released the mouse button on a different cell where it was pressed
 						//Do nothing
 					} else {
-						//Released the mouse button on the same cell where it was pressed
-						if ((gridX == 0) || (gridY == 0)) {
-							//On the left column and on the top row... do nothing
+			
+						if(gridX==4 && gridY==0){
 							
-							if(gridX == 0 && (gridY!=0 && gridY!=10)){
-								
-								for(int columnX=1; columnX<10;columnX++){
+									Boomland.newGame();
 									
-									randomColorInt = generator.nextInt(5);
-									
-									Color newColor = null;
-									switch (randomColorInt) {
-									case 0:
-										newColor = colorBank[randomColorInt];
-										break;
-									case 1:
-										newColor = colorBank[randomColorInt];
-										break;
-									case 2:
-										newColor = colorBank[randomColorInt];
-										break;
-									case 3:
-										newColor = colorBank[randomColorInt];   //Brown (from http://simple.wikipedia.org/wiki/List_of_colors)
-										break;
-									case 4:
-										newColor = colorBank[randomColorInt];   //Lavender (from http://simple.wikipedia.org/wiki/List_of_colors)
-										break;
-									}
-									myPanel.colorArray[columnX][gridY] = newColor;
-									myPanel.repaint();
-									
-								}
-								
-				
-							}else if(gridX!=0 && gridY==0){
-								for(int rowY=1; rowY<10;rowY++){
-									
-									randomColorInt = generator.nextInt(5);
-									
-									Color newColor = null;
-									switch (randomColorInt) {
-									case 0:
-										newColor = colorBank[randomColorInt];
-										break;
-									case 1:
-										newColor = colorBank[randomColorInt];
-										break;
-									case 2:
-										newColor = colorBank[randomColorInt];
-										break;
-									case 3:
-										newColor = colorBank[randomColorInt];   //Brown (from http://simple.wikipedia.org/wiki/List_of_colors)
-										break;
-									case 4:
-										newColor = colorBank[randomColorInt];   //Lavender (from http://simple.wikipedia.org/wiki/List_of_colors)
-										break;
-									}
-									myPanel.colorArray[gridX][rowY] = newColor;
-									myPanel.repaint();
-									
-								}
-							}else if(gridX == 0 && gridY == 0){
-								
-								for(int diagonal=1; diagonal<10;diagonal++){
-									
-									randomColorInt = generator.nextInt(5);
-									
-									Color newColor = null;
-									switch (randomColorInt) {
-									case 0:
-										newColor = colorBank[randomColorInt];
-										break;
-									case 1:
-										newColor = colorBank[randomColorInt];
-										break;
-									case 2:
-										newColor = colorBank[randomColorInt];
-										break;
-									case 3:
-										newColor = colorBank[randomColorInt];   //Brown (from http://simple.wikipedia.org/wiki/List_of_colors)
-										break;
-									case 4:
-										newColor = colorBank[randomColorInt];   //Lavender (from http://simple.wikipedia.org/wiki/List_of_colors)
-										break;
-									}
-									myPanel.colorArray[diagonal][diagonal] = newColor;
-									myPanel.repaint();
-									
-								}
-								
-							} else if(gridX==0 && gridY==10){
-								Color newColor = null;
-								
-								for(int i=4; i<=6; i++){
-									for(int j=4; j<=6; j++){
-										
-										randomColorInt = generator.nextInt(5);
-										
-										
-										switch (randomColorInt) {
-										case 0:
-											newColor = colorBank[randomColorInt];
-											break;
-										case 1:
-											newColor = colorBank[randomColorInt];
-											break;
-										case 2:
-											newColor = colorBank[randomColorInt];
-											break;
-										case 3:
-											newColor = colorBank[randomColorInt];   //Brown (from http://simple.wikipedia.org/wiki/List_of_colors)
-											break;
-										case 4:
-											newColor = colorBank[randomColorInt];   //Lavender (from http://simple.wikipedia.org/wiki/List_of_colors)
-											break;
-										}
-										myPanel.colorArray[i][j] = newColor;
-										myPanel.repaint();
-								
-									}}}
-								
 						} else {
+							if(gridY!=0){
 							
-							randomColorInt = generator.nextInt(5);
-							Color originalColor = myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY];
-							
-							while(colorBank[randomColorInt].equals(originalColor)){
-								randomColorInt = generator.nextInt(5);
-							}	
-							Color newColor = null;
-							switch (randomColorInt) {
-							case 0:
-								newColor = colorBank[randomColorInt];
-								break;
-							case 1:
-								newColor = colorBank[randomColorInt];
-								break;
-							case 2:
-								newColor = colorBank[randomColorInt];
-								break;
-							case 3:
-								newColor = colorBank[randomColorInt];   //Brown (from http://simple.wikipedia.org/wiki/List_of_colors)
-								break;
-							case 4:
-								newColor = colorBank[randomColorInt];   //Lavender (from http://simple.wikipedia.org/wiki/List_of_colors)
-								break;
+							if(Boomland.hitMine(gridX, gridY)){
+								
+								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[9];
+								
+							}else {
+								
+								// Open surrounding squares if they do not have a mine nearby
+								// Assing respective colors if a mine is nearby
+								
+								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[0];
+								
 							}
-							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
+							}
 							myPanel.repaint();
+							
 						}
 					}
 				}
@@ -286,48 +170,13 @@ public class MyMouseAdapter extends MouseAdapter {
 			
 			if(gridXR < 0 && gridYR < 0){
 				
-				int randomColorIntR = generator.nextInt(3);
-				Color offGridColor = null;
+				// Mine flagger.
+				// Change IF statement
 				
-				Color[] colorBankR = new Color[3];
-				colorBankR[0] = Color.BLUE;
-				colorBankR[1] = Color.RED;
-				colorBankR[2] = Color.GREEN;
 				
-				Color originalColor = myPanelR.colorArray[0][0];
-				
-				while(colorBankR[randomColorIntR].equals(originalColor)){
-					randomColorIntR = generator.nextInt(3);
-				}	
-				
-				switch(randomColorIntR){
-				case 0:
-					offGridColor = Color.BLUE;
-					break;
-				case 1:
-					offGridColor = Color.RED;
-					break;
-				case 2:
-					offGridColor = Color.GREEN;
-					break;
-					
-				}
-				
-				for(int i = 0; i< 10; i++){
-					myPanelR.colorArray[i][0] = offGridColor;
-				}
-				for(int j = 0; j< 11; j++){
-					myPanelR.colorArray[0][j] = offGridColor;
-				}
-				myPanelR.repaint();
 				
 			}
-			
-			
-			
-			
-			
-			
+				
 			break;
 		default:    //Some other button (2 = Middle mouse button, etc.)
 			//Do nothing
@@ -335,3 +184,4 @@ public class MyMouseAdapter extends MouseAdapter {
 		}
 	}
 }
+
