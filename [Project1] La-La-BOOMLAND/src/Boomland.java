@@ -19,8 +19,8 @@ public class Boomland {
 			
 			int mineX, mineY;
 			
-			for(int i=0;i<9;i++){
-				for(int j=0; i<10;j++){
+			for(int i=0;i<8;i++){
+				for(int j=0; i<9;j++){
 					for(int k = 0; k<2;k++){
 					mineList[i][j][k]=0;
 					System.out.println("mineList["+i+"]["+j+"]["+k+"] = "+mineList[i][j][k]);
