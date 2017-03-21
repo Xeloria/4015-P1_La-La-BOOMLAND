@@ -74,12 +74,12 @@ public class MyMouseAdapter extends MouseAdapter {
 		colorBank[2] = new Color(154, 255, 0);		// 2 mines
 		colorBank[3] =Color.YELLOW;					// 3 mines
 		colorBank[4] =Color.ORANGE;					// 4 mines
-		colorBank[5] = new Color(255, 111, 0);		// 5 mines
-		colorBank[6] = Color.RED;					// 6 mines
+		colorBank[5] = new Color(255, 255, 0);		// 5 mines
+		colorBank[6] = new Color(200,200,0);					// 6 mines
 		colorBank[7] = new Color(153, 0, 0);		// 7 mines
 		colorBank[8] = new Color(102, 0, 0);		// 8 mines
 		colorBank[9] = Color.BLACK;					// BOOM!
-		colorBank[10] = Color.RED;		// Flagged mine
+		colorBank[10] = Color.RED;					// Flagged mine
 		
 		
 		int randomColorInt = generator.nextInt(5);
@@ -106,6 +106,8 @@ public class MyMouseAdapter extends MouseAdapter {
 			myPanel.y = y;
 			int gridX = myPanel.getGridX(x, y);
 			int gridY = myPanel.getGridY(x, y);
+			
+			
 			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
 				//Had pressed outside
 				//Do nothing
@@ -128,7 +130,11 @@ public class MyMouseAdapter extends MouseAdapter {
 										}
 									}
 									
+									
 						} else {
+							
+							if(!(Boomland.getGameEnd())){
+							
 							if(gridY!=0){
 								
 								if(!(Boomland.mineList[gridX][gridY][1])){
@@ -140,6 +146,15 @@ public class MyMouseAdapter extends MouseAdapter {
 										myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[9];
 										Boomland.mineList[gridX][gridY][2]=true;
 						
+										for(int i = 0; i<9;i++){
+											for(int j =0;j<10;j++){
+												if(Boomland.mineList[i][j][0]==true){
+													myPanel.colorArray[i][j] = colorBank[9];
+													Boomland.mineList[i][j][2]=true;
+													Boomland.setGameEnd(true);
+												}	
+											}
+										}
 									
 									}else {
 									
@@ -148,8 +163,11 @@ public class MyMouseAdapter extends MouseAdapter {
 									
 										myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[0];
 										Boomland.mineList[gridX][gridY][2]=true;
+										
+										
+										}
+									}
 								}
-							}
 							}
 							myPanel.repaint();
 							
@@ -183,26 +201,27 @@ public class MyMouseAdapter extends MouseAdapter {
 			if(gridYR != 0){
 				
 				// Flags
+				if(!(Boomland.getGameEnd())){
 				
-				if(myPanelR.colorArray[gridXR][gridYR].equals(Color.WHITE)||myPanelR.colorArray[gridXR][gridYR].equals(Color.RED)){
-					
-					if(Boomland.mineList[gridXR][gridYR][1]){
+					if(myPanelR.colorArray[gridXR][gridYR].equals(Color.WHITE)||myPanelR.colorArray[gridXR][gridYR].equals(Color.RED)){
 						
-						myPanelR.colorArray[gridXR][gridYR] = Color.WHITE;
-						Boomland.mineList[gridXR][gridYR][1] = false;
-						System.out.println("Unflagged!");
+						if(Boomland.mineList[gridXR][gridYR][1]){
+							
+							myPanelR.colorArray[gridXR][gridYR] = Color.WHITE;
+							Boomland.mineList[gridXR][gridYR][1] = false;
+							System.out.println("Unflagged!");
+							myPanelR.repaint();
+							
+						}else{
+							
+						myPanelR.colorArray[gridXR][gridYR] = colorBank[10];
+						Boomland.mineList[gridXR][gridYR][1] = true;
+						System.out.println("Flagged");
 						myPanelR.repaint();
 						
-					}else{
-						
-					myPanelR.colorArray[gridXR][gridYR] = colorBank[10];
-					Boomland.mineList[gridXR][gridYR][1] = true;
-					System.out.println("Flagged");
-					myPanelR.repaint();
-					
+						}
 					}
 				}
-				
 			}
 				
 			break;
