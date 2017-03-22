@@ -3,14 +3,14 @@ import java.awt.Component;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Random;
 
 import javax.swing.JFrame;
 
 public class MyMouseAdapter extends MouseAdapter {
-	private Random generator = new Random();
 	
-	
+
+
+
 	public void mousePressed(MouseEvent e) {
 		switch (e.getButton()) {
 		case 1:		//Left mouse button
@@ -33,7 +33,15 @@ public class MyMouseAdapter extends MouseAdapter {
 			myPanel.y = y;
 			myPanel.mouseDownGridX = myPanel.getGridX(x, y);
 			myPanel.mouseDownGridY = myPanel.getGridY(x, y);
+			int gridX = myPanel.getGridX(x, y);
+			int gridY = myPanel.getGridY(x, y);
 			myPanel.repaint();
+			
+			if(gridX == 4 && gridY == 0){
+				myPanel.colorArray[gridX][gridY]=Color.BLUE;
+			}
+			
+			
 			break;
 		case 3:		//Right mouse button
 			//Do nothing
@@ -68,23 +76,26 @@ public class MyMouseAdapter extends MouseAdapter {
 	
 	public void mouseReleased(MouseEvent e) {
 		
-		Color[] colorBank = new Color[11];
-		colorBank[0] = Color.CYAN; 					// No mines
-		colorBank[1] = Color.GREEN;					// 1 mine
-		colorBank[2] = new Color(154, 255, 0);		// 2 mines
-		colorBank[3] =Color.YELLOW;					// 3 mines
-		colorBank[4] =Color.ORANGE;					// 4 mines
-		colorBank[5] = new Color(255, 255, 0);		// 5 mines
-		colorBank[6] = new Color(200,200,0);					// 6 mines
-		colorBank[7] = new Color(153, 0, 0);		// 7 mines
-		colorBank[8] = new Color(102, 0, 0);		// 8 mines
-		colorBank[9] = Color.BLACK;					// BOOM!
-		colorBank[10] = Color.RED;					// Flagged mine
 		
 		
-		int randomColorInt = generator.nextInt(5);
+		Color[] colorBank = new Color[3];
+		colorBank[0] = Color.LIGHT_GRAY; 			// No mines	
+		colorBank[1] = Color.RED;					// Flagged mine
+		colorBank[2] = Color.BLACK;					// BOOM!		
+		
+		String[] nearbyMines = new String[9];
+		nearbyMines[0]=" ";
+		nearbyMines[1]="1";
+		nearbyMines[2]="2";
+		nearbyMines[3]="3";
+		nearbyMines[4]="4";
+		nearbyMines[5]="5";
+		nearbyMines[6]="6";
+		nearbyMines[7]="7";
+		nearbyMines[8]="8";
 		
 		
+
 		switch (e.getButton()) {
 		case 1:		//Left mouse button
 			Component c = e.getComponent();
@@ -123,6 +134,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			
 						if(gridX==4 && gridY==0){
 							// New game button
+							myPanel.colorArray[gridX][gridY]=Color.GREEN;
 									Boomland.newGame();
 									for (int i = 0; i < 9; i++) {   
 										for (int j = 1; j < 10; j++) {
@@ -142,14 +154,15 @@ public class MyMouseAdapter extends MouseAdapter {
 									System.out.println("gridX = " + gridX + "; gridY = " + gridY);
 								
 									if(Boomland.mineList[gridX][gridY][0]){
-									
-										myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[9];
+										myPanel.colorArray[4][0]=Color.RED;
+										myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[2];
 										Boomland.mineList[gridX][gridY][2]=true;
+										System.out.println("gridX = " + gridX + "; gridY = " + gridY + " Mine!");
 						
 										for(int i = 0; i<9;i++){
 											for(int j =0;j<10;j++){
-												if(Boomland.mineList[i][j][0]==true){
-													myPanel.colorArray[i][j] = colorBank[9];
+												if(Boomland.mineList[i][j][0]){
+													myPanel.colorArray[i][j] = colorBank[2];
 													Boomland.mineList[i][j][2]=true;
 													Boomland.setGameEnd(true);
 												}	
@@ -160,10 +173,40 @@ public class MyMouseAdapter extends MouseAdapter {
 									
 									// Open surrounding squares if they do not have a mine nearby
 									// Assing respective colors if a mine is nearby
-									
+										
 										myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[0];
 										Boomland.mineList[gridX][gridY][2]=true;
 										
+//										if(gridY==1){
+//											if(gridX==0){
+//												
+//												for(int i = gridX;i<gridX+1;i++){
+//													for(int j = gridY; j<gridY+1;i++){
+//														
+//														myPanel.colorArray[i][j] = colorBank[0];
+//														
+//														
+//													}
+//												}
+//												
+//												
+//											}else if(gridX==8){
+//												
+//											}
+//											
+//										}else if(gridY==9){
+//											 if(gridX==0){
+//												 
+//											 }else if(gridX==8){
+//											
+//											 }
+//										}else if(gridX==0){
+//											
+//										}else if(gridX==8){
+//											
+//										}else{
+//											
+//										}
 										
 										}
 									}
@@ -209,23 +252,23 @@ public class MyMouseAdapter extends MouseAdapter {
 							
 							myPanelR.colorArray[gridXR][gridYR] = Color.WHITE;
 							Boomland.mineList[gridXR][gridYR][1] = false;
-							System.out.println("Unflagged!");
+							System.out.println("gridX = " + gridXR + "; gridY = " + gridYR + " Unflagged!");
 							myPanelR.repaint();
 							
 						}else{
 							
-						myPanelR.colorArray[gridXR][gridYR] = colorBank[10];
+						myPanelR.colorArray[gridXR][gridYR] = colorBank[1];
 						Boomland.mineList[gridXR][gridYR][1] = true;
-						System.out.println("Flagged");
+						System.out.println("gridX = " + gridXR + "; gridY = " + gridYR + " Flagged!");
 						myPanelR.repaint();
 						
 						}
 					}
 				}
-			}
-				
+			}			
 			break;
-		default:    //Some other button (2 = Middle mouse button, etc.)
+		default:    
+			//Some other button (2 = Middle mouse button, etc.)
 			//Do nothing
 			break;
 		}

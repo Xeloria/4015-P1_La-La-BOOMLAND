@@ -38,7 +38,7 @@ public class MyPanel extends JPanel {
 				colorArray[x][y] = Color.WHITE;
 			}
 		}
-		colorArray[4][0]=Color.BLUE; // New game button
+		colorArray[4][0]=Color.GREEN; // New game button
 		
 	}
 	
@@ -55,12 +55,12 @@ public class MyPanel extends JPanel {
 		int height = y2 - y1;
 
 		//Paint the background
-		g.setColor(Color.GRAY);
+		g.setColor(Color.BLACK);
 		g.fillRect(x1, y1, width + 1, height + 1);
 
 		
 		//By default, the grid will be 10x10 (see above: TOTAL_COLUMNS and TOTAL_ROWS) 
-		g.setColor(Color.GRAY);
+		g.setColor(Color.BLACK);
 		for (int y = 0; y <= TOTAL_ROWS; y++) {
 			g.drawLine(x1 + GRID_X, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)), x1 + GRID_X + ((INNER_CELL_SIZE + 1) * TOTAL_COLUMNS), y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)));
 		}
