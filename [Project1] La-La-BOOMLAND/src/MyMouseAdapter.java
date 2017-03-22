@@ -172,41 +172,45 @@ public class MyMouseAdapter extends MouseAdapter {
 									}else {
 									
 									// Open surrounding squares if they do not have a mine nearby
-									// Assing respective colors if a mine is nearby
+									// Assing respective numbers if a mine is nearby
 										
 										myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[0];
 										Boomland.mineList[gridX][gridY][2]=true;
 										
-//										if(gridY==1){
-//											if(gridX==0){
-//												
-//												for(int i = gridX;i<gridX+1;i++){
-//													for(int j = gridY; j<gridY+1;i++){
-//														
-//														myPanel.colorArray[i][j] = colorBank[0];
-//														
-//														
-//													}
-//												}
-//												
-//												
-//											}else if(gridX==8){
-//												
-//											}
-//											
-//										}else if(gridY==9){
-//											 if(gridX==0){
-//												 
-//											 }else if(gridX==8){
-//											
-//											 }
-//										}else if(gridX==0){
-//											
-//										}else if(gridX==8){
-//											
-//										}else{
-//											
-//										}
+										if((((gridX!=0)||(gridX!=8))&&((gridY!=1)||(gridY!=9)))){
+											
+											for(int i = gridX-1; i<gridX+2;i++){
+												for(int j = gridY-1; j<gridY+2;j++){
+													
+													if(!(Boomland.mineList[i][j][0])&&((i!=-1)||(j!=0))){
+														myPanel.colorArray[i][j] = colorBank[0];
+														Boomland.mineList[i][j][2]=true;
+														System.out.println("gridX = " + i + "; gridY = " + j + " Uncovered!");
+														if(!(Boomland.mineList[i][j][0])&&(((i!=0)||(i!=8))&&((j!=1)||(j!=9)))){
+															for(int m = i-1;m<i+2;m++){
+																for(int n = j-1;n<i+2;n++){
+																	if(!(Boomland.mineList[m][n][0])){
+																		if(m!=-1||n!=0){
+																		myPanel.colorArray[m][n] = colorBank[0];
+																		Boomland.mineList[m][n][2]=true;
+																		System.out.println("gridX = " + m + "; gridY = " + n + " Uncovered!");
+																		}
+																	}else{
+																		System.out.println("Mine nearby!");
+																	}
+																}
+															}
+														}
+													}else{
+														System.out.println("Mine nearby!");
+													}
+													
+												}
+											}	
+										}
+										
+										
+
 										
 										}
 									}

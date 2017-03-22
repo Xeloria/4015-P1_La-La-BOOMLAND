@@ -30,7 +30,7 @@ public class MyPanel extends JPanel {
 		}
 				
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {   //Top row
-			colorArray[x][0] = Color.LIGHT_GRAY;
+			colorArray[x][0] = Color.GRAY;
 		}
 		
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {   //The rest of the grid
