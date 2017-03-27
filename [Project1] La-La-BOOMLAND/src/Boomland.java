@@ -196,28 +196,34 @@ public class Boomland extends MouseAdapter{
 		int up = mineY-1;
 		int down = mineY+1;
 
-		if(nearbyMines[mineX][mineY]!=0&&(!mineList[mineX][mineY][2])&&(!mineList[mineX][mineY][0])){
+		if(nearbyMines[mineX][mineY]!=0&&(!mineList[mineX][mineY][2])&&(!mineList[mineX][mineY][0])&&(!mineList[mineX][mineY][1])){
 			return;
 		}else{
 			
 			//Center
 			if(mineX>0&&mineX<8&&mineY>1&&mineY<9){			
-				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][up][1])){
 					myPanel.colorArray[mineX][up] = colorBank[0];
 					mineList[mineX][up][2]=true;
+					
+					NumberDisplay numberDisplay = new NumberDisplay();
+					myFrame.add(numberDisplay);
+					NumberDisplay.setMineX(mineX);
+					NumberDisplay.setMineY(up);
+					
 					neighbors(e, mineX, up);
 				}
-				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][down][1])){
 					myPanel.colorArray[mineX][down] = colorBank[0];
 					mineList[mineX][down][2]=true;
 					neighbors(e, mineX, down);
 				}
-				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[left][mineY][1])){
 					myPanel.colorArray[left][mineY] = colorBank[0];
 					mineList[left][mineY][2]=true;
 					neighbors(e, left, mineY);
 				}			
-				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[right][mineY][1])){
 					myPanel.colorArray[right][mineY] = colorBank[0];
 					mineList[right][mineY][2]=true;
 					neighbors(e, right, mineY);
@@ -227,22 +233,22 @@ public class Boomland extends MouseAdapter{
 			
 			//Left
 			if(mineX==0&&(mineY>1&&mineY<9)){
-				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][up][1])){
 					myPanel.colorArray[mineX][up] = colorBank[0];
 					mineList[mineX][up][2]=true;
 					neighbors(e, mineX, up);
 				}			
-				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][down][1])){
 					myPanel.colorArray[mineX][down] = colorBank[0];
 					mineList[mineX][down][2]=true;
 					neighbors(e, mineX, down);
 				}		
-//				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+//				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[left][mineY][1])){
 //					myPanel.colorArray[left][mineY] = colorBank[0];
 //					mineList[left][mineY][2]=true;
 //					neighbors(e, left, mineY);
 //				}			
-				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[right][mineY][1])){
 					myPanel.colorArray[right][mineY] = colorBank[0];
 					mineList[right][mineY][2]=true;
 					neighbors(e, right, mineY);
@@ -252,22 +258,22 @@ public class Boomland extends MouseAdapter{
 			
 			//Right
 			if(mineX==8&&(mineY>1&&mineY<9)){
-				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][up][1])){
 					myPanel.colorArray[mineX][up] = colorBank[0];
 					mineList[mineX][up][2]=true;
 					neighbors(e, mineX, up);
 				}
-				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][down][1])){
 					myPanel.colorArray[mineX][down] = colorBank[0];
 					mineList[mineX][down][2]=true;
 					neighbors(e, mineX, down);
 				}
-				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[left][mineY][1])){
 					myPanel.colorArray[left][mineY] = colorBank[0];
 					mineList[left][mineY][2]=true;
 					neighbors(e, left, mineY);
 				}
-//				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+//				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[right][mineY][1])){
 //					myPanel.colorArray[right][mineY] = colorBank[0];
 //					mineList[right][mineY][2]=true;
 //					neighbors(e, right, mineY);
@@ -277,22 +283,22 @@ public class Boomland extends MouseAdapter{
 			
 			//Top
 			if((mineX>0&&mineX<8)&&mineY==1){
-//				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+//				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][up][1])){
 //					myPanel.colorArray[mineX][up] = colorBank[0];
 //					mineList[mineX][up][2]=true;
 //					neighbors(e, mineX, up);
 //				}
-				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][down][1])){
 					myPanel.colorArray[mineX][down] = colorBank[0];
 					mineList[mineX][down][2]=true;
 					neighbors(e, mineX, down);
 				}
-				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[left][mineY][1])){
 					myPanel.colorArray[left][mineY] = colorBank[0];
 					mineList[left][mineY][2]=true;
 					neighbors(e, left, mineY);
 				}
-				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[right][mineY][1])){
 					myPanel.colorArray[right][mineY] = colorBank[0];
 					mineList[right][mineY][2]=true;
 					neighbors(e, right, mineY);
@@ -302,22 +308,22 @@ public class Boomland extends MouseAdapter{
 			
 			//Bottom
 			if((mineX>0&&mineX<8)&&mineY==9){
-				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][up][1])){
 					myPanel.colorArray[mineX][up] = colorBank[0];
 					mineList[mineX][up][2]=true;
 					neighbors(e, mineX, up);
 				}
-//				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+//				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][down][1])){
 //					myPanel.colorArray[mineX][down] = colorBank[0];
 //					mineList[mineX][down][2]=true;
 //					neighbors(e, mineX, down);
 //				}
-				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[left][mineY][1])){
 					myPanel.colorArray[left][mineY] = colorBank[0];
 					mineList[left][mineY][2]=true;
 					neighbors(e, left, mineY);
 				}
-				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[right][mineY][1])){
 					myPanel.colorArray[right][mineY] = colorBank[0];
 					mineList[right][mineY][2]=true;
 					neighbors(e, right, mineY);
@@ -327,22 +333,22 @@ public class Boomland extends MouseAdapter{
 			
 			//Top Left
 			if(mineX==0&&mineY==1){
-//				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+//				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][up][1])){
 //					myPanel.colorArray[mineX][up] = colorBank[0];
 //					mineList[mineX][up][2]=true;
 //					neighbors(e, mineX, up);
 //				}
-				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][down][1])){
 					myPanel.colorArray[mineX][down] = colorBank[0];
 					mineList[mineX][down][2]=true;
 					neighbors(e, mineX, down);
 				}
-//				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+//				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[left][mineY][1])){
 //					myPanel.colorArray[left][mineY] = colorBank[0];
 //					mineList[left][mineY][2]=true;
 //					neighbors(e, left, mineY);
 //				}
-				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[right][mineY][1])){
 					myPanel.colorArray[right][mineY] = colorBank[0];
 					mineList[right][mineY][2]=true;
 					neighbors(e, right, mineY);
@@ -352,22 +358,22 @@ public class Boomland extends MouseAdapter{
 			
 			//Top Right
 			if(mineX==8&&mineY==1){
-//				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+//				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][up][1])){
 //					myPanel.colorArray[mineX][up] = colorBank[0];
 //					mineList[mineX][up][2]=true;
 //					neighbors(e, mineX, up);
 //				}
-				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][down][1])){
 					myPanel.colorArray[mineX][down] = colorBank[0];
 					mineList[mineX][down][2]=true;
 					neighbors(e, mineX, down);
 				}
-				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[left][mineY][1])){
 					myPanel.colorArray[left][mineY] = colorBank[0];
 					mineList[left][mineY][2]=true;
 					neighbors(e, left, mineY);
 				}
-//				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+//				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[right][mineY][1])){
 //					myPanel.colorArray[right][mineY] = colorBank[0];
 //					mineList[right][mineY][2]=true;
 //					neighbors(e, right, mineY);
@@ -377,22 +383,22 @@ public class Boomland extends MouseAdapter{
 			
 			//Bottom Left
 			if(mineX==0&&mineY==9){
-				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][up][1])){
 					myPanel.colorArray[mineX][up] = colorBank[0];
 					mineList[mineX][up][2]=true;
 					neighbors(e, mineX, up);
 				}
-//				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+//				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][down][1])){
 //					myPanel.colorArray[mineX][down] = colorBank[0];
 //					mineList[mineX][down][2]=true;
 //					neighbors(e, mineX, down);
 //				}
-//				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+//				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[left][mineY][1])){
 //					myPanel.colorArray[left][mineY] = colorBank[0];
 //					mineList[left][mineY][2]=true;
 //					neighbors(e, left, mineY);
 //				}
-				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[right][mineY][1])){
 					myPanel.colorArray[right][mineY] = colorBank[0];
 					mineList[right][mineY][2]=true;
 					neighbors(e, right, mineY);
@@ -402,22 +408,22 @@ public class Boomland extends MouseAdapter{
 			
 			//Bottom Right
 			if(mineX==8&&mineY==9){
-				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][up][1])){
 					myPanel.colorArray[mineX][up] = colorBank[0];
 					mineList[mineX][up][2]=true;
 					neighbors(e, mineX, up);
 				}
-//				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+//				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][down][1])){
 //					myPanel.colorArray[mineX][down] = colorBank[0];
 //					mineList[mineX][down][2]=true;
 //					neighbors(e, mineX, down);
 //				}
-				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[left][mineY][1])){
 					myPanel.colorArray[left][mineY] = colorBank[0];
 					mineList[left][mineY][2]=true;
 					neighbors(e, left, mineY);
 				}
-//				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+//				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[right][mineY][1])){
 //					myPanel.colorArray[right][mineY] = colorBank[0];
 //					mineList[right][mineY][2]=true;
 //					neighbors(e, right, mineY);
