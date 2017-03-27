@@ -5,8 +5,8 @@ public class Main {
 		JFrame myFrame = new JFrame("La-La-Boomland");
 		myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		myFrame.setLocation(400, 150);
-		myFrame.setSize(400, 400);
-
+		myFrame.setSize(350, 410);
+	
 		MyPanel myPanel = new MyPanel();
 		myFrame.add(myPanel);
 
@@ -15,14 +15,12 @@ public class Main {
 
 		myFrame.setVisible(true);
 		
-		newGame();
+		Boomland.newGame();
 		
 		
 	}
 	
-	public static void newGame(){
-		Boomland.newGame();
-	}
+	
 	
 	
 	
