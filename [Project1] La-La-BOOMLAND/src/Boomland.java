@@ -196,33 +196,234 @@ public class Boomland extends MouseAdapter{
 		int up = mineY-1;
 		int down = mineY+1;
 
-		if(nearbyMines[mineX][mineY]!=0&&(mineList[mineX][mineY][2])&&(!mineList[mineX][mineY][0])){
+		if(nearbyMines[mineX][mineY]!=0&&(!mineList[mineX][mineY][2])&&(!mineList[mineX][mineY][0])){
 			return;
 		}else{
 			
-			if(mineX>0&&mineX<8&&mineY>1&&mineY<9){
-				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]){
+			//Center
+			if(mineX>0&&mineX<8&&mineY>1&&mineY<9){			
+				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
 					myPanel.colorArray[mineX][up] = colorBank[0];
 					mineList[mineX][up][2]=true;
+					neighbors(e, mineX, up);
 				}
-				if(!mineList[mineX][down][0]){
+				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
 					myPanel.colorArray[mineX][down] = colorBank[0];
 					mineList[mineX][down][2]=true;
+					neighbors(e, mineX, down);
 				}
-				if(!mineList[left][mineY][0]){
+				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
 					myPanel.colorArray[left][mineY] = colorBank[0];
 					mineList[left][mineY][2]=true;
-				}
-				if(!mineList[right][mineY][0]){
+					neighbors(e, left, mineY);
+				}			
+				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
 					myPanel.colorArray[right][mineY] = colorBank[0];
 					mineList[right][mineY][2]=true;
+					neighbors(e, right, mineY);
 					}
 					return;
 			}
-			//TO-DO: add cases
-//			if(mineX==0&&())
 			
+			//Left
+			if(mineX==0&&(mineY>1&&mineY<9)){
+				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[mineX][up] = colorBank[0];
+					mineList[mineX][up][2]=true;
+					neighbors(e, mineX, up);
+				}			
+				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[mineX][down] = colorBank[0];
+					mineList[mineX][down][2]=true;
+					neighbors(e, mineX, down);
+				}		
+//				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+//					myPanel.colorArray[left][mineY] = colorBank[0];
+//					mineList[left][mineY][2]=true;
+//					neighbors(e, left, mineY);
+//				}			
+				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[right][mineY] = colorBank[0];
+					mineList[right][mineY][2]=true;
+					neighbors(e, right, mineY);
+					}
+					return;
+			}
 			
+			//Right
+			if(mineX==8&&(mineY>1&&mineY<9)){
+				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[mineX][up] = colorBank[0];
+					mineList[mineX][up][2]=true;
+					neighbors(e, mineX, up);
+				}
+				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[mineX][down] = colorBank[0];
+					mineList[mineX][down][2]=true;
+					neighbors(e, mineX, down);
+				}
+				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[left][mineY] = colorBank[0];
+					mineList[left][mineY][2]=true;
+					neighbors(e, left, mineY);
+				}
+//				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+//					myPanel.colorArray[right][mineY] = colorBank[0];
+//					mineList[right][mineY][2]=true;
+//					neighbors(e, right, mineY);
+//					}
+					return;
+			}
+			
+			//Top
+			if((mineX>0&&mineX<8)&&mineY==1){
+//				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+//					myPanel.colorArray[mineX][up] = colorBank[0];
+//					mineList[mineX][up][2]=true;
+//					neighbors(e, mineX, up);
+//				}
+				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[mineX][down] = colorBank[0];
+					mineList[mineX][down][2]=true;
+					neighbors(e, mineX, down);
+				}
+				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[left][mineY] = colorBank[0];
+					mineList[left][mineY][2]=true;
+					neighbors(e, left, mineY);
+				}
+				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[right][mineY] = colorBank[0];
+					mineList[right][mineY][2]=true;
+					neighbors(e, right, mineY);
+					}
+					return;
+			}
+			
+			//Bottom
+			if((mineX>0&&mineX<8)&&mineY==9){
+				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[mineX][up] = colorBank[0];
+					mineList[mineX][up][2]=true;
+					neighbors(e, mineX, up);
+				}
+//				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+//					myPanel.colorArray[mineX][down] = colorBank[0];
+//					mineList[mineX][down][2]=true;
+//					neighbors(e, mineX, down);
+//				}
+				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[left][mineY] = colorBank[0];
+					mineList[left][mineY][2]=true;
+					neighbors(e, left, mineY);
+				}
+				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[right][mineY] = colorBank[0];
+					mineList[right][mineY][2]=true;
+					neighbors(e, right, mineY);
+					}
+					return;
+			}
+			
+			//Top Left
+			if(mineX==0&&mineY==1){
+//				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+//					myPanel.colorArray[mineX][up] = colorBank[0];
+//					mineList[mineX][up][2]=true;
+//					neighbors(e, mineX, up);
+//				}
+				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[mineX][down] = colorBank[0];
+					mineList[mineX][down][2]=true;
+					neighbors(e, mineX, down);
+				}
+//				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+//					myPanel.colorArray[left][mineY] = colorBank[0];
+//					mineList[left][mineY][2]=true;
+//					neighbors(e, left, mineY);
+//				}
+				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[right][mineY] = colorBank[0];
+					mineList[right][mineY][2]=true;
+					neighbors(e, right, mineY);
+					}
+					return;
+			}
+			
+			//Top Right
+			if(mineX==8&&mineY==1){
+//				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+//					myPanel.colorArray[mineX][up] = colorBank[0];
+//					mineList[mineX][up][2]=true;
+//					neighbors(e, mineX, up);
+//				}
+				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[mineX][down] = colorBank[0];
+					mineList[mineX][down][2]=true;
+					neighbors(e, mineX, down);
+				}
+				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[left][mineY] = colorBank[0];
+					mineList[left][mineY][2]=true;
+					neighbors(e, left, mineY);
+				}
+//				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+//					myPanel.colorArray[right][mineY] = colorBank[0];
+//					mineList[right][mineY][2]=true;
+//					neighbors(e, right, mineY);
+//					}
+					return;
+			}
+			
+			//Bottom Left
+			if(mineX==0&&mineY==9){
+				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[mineX][up] = colorBank[0];
+					mineList[mineX][up][2]=true;
+					neighbors(e, mineX, up);
+				}
+//				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+//					myPanel.colorArray[mineX][down] = colorBank[0];
+//					mineList[mineX][down][2]=true;
+//					neighbors(e, mineX, down);
+//				}
+//				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+//					myPanel.colorArray[left][mineY] = colorBank[0];
+//					mineList[left][mineY][2]=true;
+//					neighbors(e, left, mineY);
+//				}
+				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[right][mineY] = colorBank[0];
+					mineList[right][mineY][2]=true;
+					neighbors(e, right, mineY);
+					}
+					return;
+			}
+			
+			//Bottom Right
+			if(mineX==8&&mineY==9){
+				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[mineX][up] = colorBank[0];
+					mineList[mineX][up][2]=true;
+					neighbors(e, mineX, up);
+				}
+//				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0){
+//					myPanel.colorArray[mineX][down] = colorBank[0];
+//					mineList[mineX][down][2]=true;
+//					neighbors(e, mineX, down);
+//				}
+				if(!mineList[left][mineY][0]&&!mineList[left][mineY][2]&&nearbyMines[mineX][mineY]==0){
+					myPanel.colorArray[left][mineY] = colorBank[0];
+					mineList[left][mineY][2]=true;
+					neighbors(e, left, mineY);
+				}
+//				if(!mineList[right][mineY][0]&&!mineList[right][mineY][2]&&nearbyMines[mineX][mineY]==0){
+//					myPanel.colorArray[right][mineY] = colorBank[0];
+//					mineList[right][mineY][2]=true;
+//					neighbors(e, right, mineY);
+//					}
+					return;
+			}
 			
 			
 		}
