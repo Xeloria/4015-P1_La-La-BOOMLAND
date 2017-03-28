@@ -43,6 +43,7 @@ public class Boomland extends MouseAdapter{
 				}
 			}
 			//Setting up the mines
+			
 			for(int m = 0; m<10; m++){
 				mineX = randNum.nextInt(9);
 				mineY = randNum.nextInt(9)+1;
@@ -54,6 +55,55 @@ public class Boomland extends MouseAdapter{
 	
 		 System.out.println("New game!");
 	}
+	
+	
+	public static void gameWin(MouseEvent e){
+		Component c = e.getComponent();
+		while (!(c instanceof JFrame)) {
+			c = c.getParent();
+			if (c == null) {return;}}
+		JFrame myFrame = (JFrame) c;
+		MyPanel myPanel = (MyPanel) myFrame.getContentPane().getComponent(0);
+		
+		int openedMines = 0;
+		int flaggedMines = 0;
+		
+		
+		for(int i=0; i<9;i++){
+			for(int j=0; j<10; j++){
+				if(!mineList[i][j][0]&&mineList[i][j][2]){
+					openedMines++;
+				}
+			}
+		}
+		
+		for(int i=0; i<9;i++){
+			for(int j=0; j<10; j++){
+				if(mineList[i][j][0]&&mineList[i][j][1]){
+					flaggedMines++;
+				}
+			}
+		}
+		
+		if(openedMines==71||flaggedMines==10){
+			myPanel.colorArray[4][0]=Color.BLUE;
+			gameEnd = true;
+			System.out.println("You won!");
+			for(int i = 0; i<9;i++){
+				for(int j =0;j<10;j++){
+					if(Boomland.mineList[i][j][0]){
+						myPanel.colorArray[i][j] = Color.BLUE;
+					}
+				}
+			}
+		}
+		
+	}
+	
+	
+	
+	
+	
 	
 	public static void minesNearby(){
 		
@@ -77,7 +127,7 @@ public class Boomland extends MouseAdapter{
 					
 					//Left
 					if(i==0&&(j!=1&&j!=9)){
-						for(int m = i;m<i+1;m++){
+						for(int m = i;m<i+2;m++){
 							for(int n = j-1;n<j+2;n++){
 								if((mineList[m][n][0])){
 									nearbyMines[i][j]++;
@@ -88,7 +138,7 @@ public class Boomland extends MouseAdapter{
 					
 					//Right
 					if(i==8&&(j!=1&&j!=9)){
-						for(int m = i-1;m<i;m++){
+						for(int m = i-1;m<i+1;m++){
 							for(int n = j-1;n<j+2;n++){
 								if((mineList[m][n][0])){
 									nearbyMines[i][j]++;
@@ -100,7 +150,7 @@ public class Boomland extends MouseAdapter{
 					//Top
 					if(j==1&&(i!=0&&i!=8)){
 						for(int m = i-1;m<i+2;m++){
-							for(int n = j;n<j+1;n++){
+							for(int n = j;n<j+2;n++){
 								if((mineList[m][n][0])){
 									nearbyMines[i][j]++;
 									System.out.println("gridX = "+i+"; gridY = "+j+"; has "+nearbyMines[i][j]+" nearbyMines");
@@ -110,7 +160,7 @@ public class Boomland extends MouseAdapter{
 					}
 					
 					//Bottom
-					if(j==1&&(i!=0&&i!=8)){
+					if(j==9&&(i!=0&&i!=8)){
 						for(int m = i-1;m<i+2;m++){
 							for(int n = j-1;n<j+1;n++){
 								if((mineList[m][n][0])){
@@ -122,8 +172,8 @@ public class Boomland extends MouseAdapter{
 					
 					//Top left
 					if(i==0&&j==1){
-						for(int m = i;m<i+1;m++){
-							for(int n = j;n<j+1;n++){
+						for(int m = i;m<i+2;m++){
+							for(int n = j;n<j+2;n++){
 								if((mineList[m][n][0])){
 									nearbyMines[i][j]++;
 									System.out.println("gridX = "+i+"; gridY = "+j+"; has "+nearbyMines[i][j]+" nearbyMines");								}
@@ -133,7 +183,7 @@ public class Boomland extends MouseAdapter{
 					
 					//Bottom left
 					if(i==0&&j==9){
-						for(int m = i;m<i+1;m++){
+						for(int m = i;m<i+2;m++){
 							for(int n = j-1;n<j+1;n++){
 								if((mineList[m][n][0])){
 									nearbyMines[i][j]++;
@@ -145,7 +195,7 @@ public class Boomland extends MouseAdapter{
 					//Top right
 					if(i==8&&j==1){
 						for(int m = i-1;m<i+1;m++){
-							for(int n = j;n<j+1;n++){
+							for(int n = j;n<j+2;n++){
 								if((mineList[m][n][0])){
 									nearbyMines[i][j]++;
 									System.out.println("gridX = "+i+"; gridY = "+j+"; has "+nearbyMines[i][j]+" nearbyMines");								}
@@ -154,8 +204,8 @@ public class Boomland extends MouseAdapter{
 					}
 					
 					//Bottom right
-					if(i==0&&j==1){
-						for(int m = i;m<i+1;m++){
+					if(i==8&&j==9){
+						for(int m = i-1;m<i+1;m++){
 							for(int n = j-1;n<j+1;n++){
 								if((mineList[m][n][0])){
 									nearbyMines[i][j]++;
@@ -178,6 +228,22 @@ public class Boomland extends MouseAdapter{
 	
 	
 	public static void neighbors(MouseEvent e, int mineX, int mineY){
+		
+		Color[] colorBank = new Color[11];
+		colorBank[0] = new Color(102,178,255);
+		colorBank[1] = Color.CYAN;
+		colorBank[2] = new Color(0,153,0);
+		colorBank[3] = new Color(50, 92, 133);
+		colorBank[4] = new Color(0, 0, 153);
+		colorBank[5] = new Color(175, 70, 0);
+		colorBank[6] = new Color(0, 153, 153);
+		colorBank[7] = new Color(153, 51, 255);
+		colorBank[8] = new Color(153, 0, 76);
+		colorBank[9] = Color.RED;					
+		colorBank[10] = Color.BLACK;
+		
+		
+		
 		Component c = e.getComponent();
 		while (!(c instanceof JFrame)) {
 			c = c.getParent();
@@ -186,10 +252,7 @@ public class Boomland extends MouseAdapter{
 		MyPanel myPanel = (MyPanel) myFrame.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
 
 		
-		Color[] colorBank = new Color[3];
-		colorBank[0] = Color.LIGHT_GRAY; 			// No mines	
-		colorBank[1] = Color.RED;					// Flagged mine
-		colorBank[2] = Color.BLACK;					// BOOM!	
+			
 		
 		int left = mineX-1;
 		int right = mineX+1;
@@ -205,12 +268,6 @@ public class Boomland extends MouseAdapter{
 				if(!mineList[mineX][up][0]&&!mineList[mineX][up][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][up][1])){
 					myPanel.colorArray[mineX][up] = colorBank[0];
 					mineList[mineX][up][2]=true;
-					
-					NumberDisplay numberDisplay = new NumberDisplay();
-					myFrame.add(numberDisplay);
-					NumberDisplay.setMineX(mineX);
-					NumberDisplay.setMineY(up);
-					
 					neighbors(e, mineX, up);
 				}
 				if(!mineList[mineX][down][0]&&!mineList[mineX][down][2]&&nearbyMines[mineX][mineY]==0&&(!mineList[mineX][down][1])){
@@ -432,7 +489,23 @@ public class Boomland extends MouseAdapter{
 			}
 			
 			
+		
+		
+			
+				
 		}
-	}
-}
+				
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+
 		

@@ -23,39 +23,42 @@ public class MyMouseAdapter extends MouseAdapter {
 				}
 			}
 			JFrame myFrame = (JFrame) c;
-			MyPanel myPanel = (MyPanel) myFrame.getContentPane().getComponent(0);
+			MyPanel myPanelR = (MyPanel) myFrame.getContentPane().getComponent(0);
 			Insets myInsets = myFrame.getInsets();
 			int x1 = myInsets.left;
 			int y1 = myInsets.top;
 			e.translatePoint(-x1, -y1);
 			int x = e.getX();
 			int y = e.getY();
-			myPanel.x = x;
-			myPanel.y = y;
-			myPanel.mouseDownGridX = myPanel.getGridX(x, y);
-			myPanel.mouseDownGridY = myPanel.getGridY(x, y);
-			int gridX = myPanel.getGridX(x, y);
-			int gridY = myPanel.getGridY(x, y);
-			myPanel.repaint();
+			myPanelR.x = x;
+			myPanelR.y = y;
+			myPanelR.mouseDownGridX = myPanelR.getGridX(x, y);
+			myPanelR.mouseDownGridY = myPanelR.getGridY(x, y);
+			int gridXR = myPanelR.getGridX(x, y);
+			int gridYR = myPanelR.getGridY(x, y);
+			myPanelR.repaint();
 			
-			pGridX = gridX;
-			pGridY = gridY;
+			pGridX = gridXR;
+			pGridY = gridYR;
 			
-			if(gridX == 4 && gridY == 0){
+			
+							
+			if(gridXR == 4 && gridYR == 0){
 				if(!(Boomland.getGameEnd())){
-					myPanel.colorArray[gridX][gridY]= new Color(0,204,0);
+					myPanelR.colorArray[gridXR][gridYR]= new Color(0,204,0);
 				}else{
-					myPanel.colorArray[gridX][gridY]= new Color(204,0,0);
+					myPanelR.colorArray[gridXR][gridYR]= new Color(204,0,0);
 				}
 			}
-			if(gridY!=0){
+			if(gridYR!=0){
 				if(!(Boomland.getGameEnd())){
-					if(!Boomland.mineList[gridX][gridY][2]){
-						myPanel.colorArray[gridX][gridY] = new Color(224, 224, 224);
+					if(!Boomland.mineList[gridXR][gridYR][2]&&!Boomland.mineList[gridXR][gridYR][1]){
+						myPanelR.colorArray[gridXR][gridYR] = new Color(224, 224, 224);
 					}
 				}	
 			}
-			
+					
+							
 			break;
 		case 3:		//Right mouse button
 			//Do nothing
@@ -67,46 +70,46 @@ public class MyMouseAdapter extends MouseAdapter {
 				}
 			}
 			JFrame myFrameR = (JFrame) cR;
-			MyPanel myPanelR = (MyPanel) myFrameR.getContentPane().getComponent(0);
+			MyPanel myPanelR1 = (MyPanel) myFrameR.getContentPane().getComponent(0);
 			Insets myInsetsR = myFrameR.getInsets();
 			int x1R = myInsetsR.left;
 			int y1R = myInsetsR.top;
 			e.translatePoint(-x1R, -y1R);
 			int xR = e.getX();
 			int yR = e.getY();
-			myPanelR.x = xR;
-			myPanelR.y = yR;
-			myPanelR.mouseDownGridX = myPanelR.getGridX(xR, yR);
-			myPanelR.mouseDownGridY = myPanelR.getGridY(xR, yR);
-			myPanelR.repaint();
+			myPanelR1.x = xR;
+			myPanelR1.y = yR;
+			myPanelR1.mouseDownGridX = myPanelR1.getGridX(xR, yR);
+			myPanelR1.mouseDownGridY = myPanelR1.getGridY(xR, yR);
+			myPanelR1.repaint();
+			
 			break;
 		default:    //Some other button (2 = Middle mouse button, etc.)
 			//Do nothing
 			break;
 		}
-	}
+}
 	
 	
 	
 	public void mouseReleased(MouseEvent e) {
 		
 		
-		Color[] colorBank = new Color[3];
-		colorBank[0] = Color.LIGHT_GRAY; 			// No mines	
-		colorBank[1] = Color.RED;					// Flagged mine
-		colorBank[2] = Color.BLACK;					// BOOM!	
+		Color[] colorBank = new Color[11];
+		colorBank[0] = new Color(102,178,255);
+		colorBank[1] = Color.CYAN;
+		colorBank[2] = new Color(0,153,0);
+		colorBank[3] = new Color(50, 92, 133);
+		colorBank[4] = new Color(0, 0, 153);
+		colorBank[5] = new Color(175, 70, 0);
+		colorBank[6] = new Color(0, 153, 153);
+		colorBank[7] = new Color(153, 51, 255);
+		colorBank[8] = new Color(153, 0, 76);
+		colorBank[9] = Color.RED;					
+		colorBank[10] = Color.BLACK;
 			
 		
-		String[] nearbyMines = new String[9];
-		nearbyMines[0]=" ";
-		nearbyMines[1]="1";
-		nearbyMines[2]="2";
-		nearbyMines[3]="3";
-		nearbyMines[4]="4";
-		nearbyMines[5]="5";
-		nearbyMines[6]="6";
-		nearbyMines[7]="7";
-		nearbyMines[8]="8";
+		
 		
 		
 
@@ -120,75 +123,98 @@ public class MyMouseAdapter extends MouseAdapter {
 				}
 			}
 			JFrame myFrame = (JFrame) c;
-			MyPanel myPanel = (MyPanel) myFrame.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
+			MyPanel myPanelR = (MyPanel) myFrame.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
 			Insets myInsets = myFrame.getInsets();
 			int x1 = myInsets.left;
 			int y1 = myInsets.top;
 			e.translatePoint(-x1, -y1);
 			int x = e.getX();
 			int y = e.getY();
-			myPanel.x = x;
-			myPanel.y = y;
+			myPanelR.x = x;
+			myPanelR.y = y;
 //			int gridX = myPanel.getGridX(x, y);
 //			int gridY = myPanel.getGridY(x, y);
 			
-			int gridX = pGridX;
-			int gridY = pGridY;
+			int gridXR = pGridX;
+			int gridYR = pGridY;
 			
-			
-			if(gridX==4 && gridY==0){
-				// New game button
-				myPanel.colorArray[gridX][gridY]=Color.GREEN;
-						Boomland.newGame();
-						for (int i = 0; i < 9; i++) {   
-							for (int j = 1; j < 10; j++) {
-								myPanel.colorArray[i][j] = Color.WHITE;
-							}
-						}
-			
+			if ((myPanelR.mouseDownGridX == -1) || (myPanelR.mouseDownGridY == -1)) {
+				//Had pressed outside
+				//Do nothing
 			} else {
-				
-				if(!(Boomland.getGameEnd())){
-				
-				if(gridY!=0){
-					
-					if(!(Boomland.mineList[gridX][gridY][1])){
+				if ((gridXR == -1) || (gridYR == -1)) {
+					//Is releasing outside
+					//Do nothing
+				} else {
+					if ((myPanelR.mouseDownGridX != gridXR) || (myPanelR.mouseDownGridY != gridYR)) {
+						//Released the mouse button on a different cell where it was pressed
+						//Do nothing
+					} else {
+			
+						if(gridXR==4 && gridYR==0){
+							// New game button
+							myPanelR.colorArray[gridXR][gridYR]=Color.GREEN;
+									Boomland.newGame();
+									for (int i = 0; i < 9; i++) {   
+										for (int j = 1; j < 10; j++) {
+											myPanelR.colorArray[i][j] = Color.WHITE;
+										}
+									}
 						
-							if(Boomland.mineList[gridX][gridY][0]){
-								myPanel.colorArray[4][0]=Color.RED;
-								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[2];
-								//Boomland.mineList[gridX][gridY][2]=true;
-								System.out.println("gridX = " + gridX + "; gridY = " + gridY + "; You hit a Mine!");
+						} else {
+							
+							if(!(Boomland.getGameEnd())){
+							
+							if(gridYR!=0){
+								
+								if(!(Boomland.mineList[gridXR][gridYR][1])){
+									
+										if(Boomland.mineList[gridXR][gridYR][0]){
+											myPanelR.colorArray[4][0]=Color.RED;
+											myPanelR.colorArray[myPanelR.mouseDownGridX][myPanelR.mouseDownGridY] = colorBank[2];
+											//Boomland.mineList[gridX][gridY][2]=true;
+											System.out.println("gridX = " + gridXR + "; gridY = " + gridYR + "; You hit a Mine!");
+							
+											for(int i = 0; i<9;i++){
+												for(int j =0;j<10;j++){
+													if(Boomland.mineList[i][j][0]){
+														myPanelR.colorArray[i][j] = colorBank[10];
+														Boomland.mineList[i][j][2]=true;
+														Boomland.setGameEnd(true);
+													}	
+												}
+											}
+										
+										}else {
 				
-								for(int i = 0; i<9;i++){
-									for(int j =0;j<10;j++){
-										if(Boomland.mineList[i][j][0]){
-											myPanel.colorArray[i][j] = colorBank[2];
-											Boomland.mineList[i][j][2]=true;
-											Boomland.setGameEnd(true);
-										}	
+										// Open surrounding squares if they do not have a mine nearby
+										// Assign respective numbers if a mine is nearby
+				
+											
+											myPanelR.colorArray[gridXR][gridYR]=colorBank[Boomland.nearbyMines[gridXR][gridYR]];
+											System.out.println("gridX = " + gridXR + "; gridY = " + gridYR+"; has "+Boomland.nearbyMines[gridXR][gridYR]+" nearbyMines");
+											Boomland.neighbors(e,gridXR,gridYR);
+											
+											for(int i = 0; i<9;i++){
+												for(int j = 1; j<10;j++){	
+													if(!Boomland.mineList[i][j][0]&&Boomland.mineList[i][j][2])
+																myPanelR.colorArray[i][j]=colorBank[Boomland.nearbyMines[i][j]];
+																
+												}
+												
+											}
+											Boomland.gameWin(e);
+											
+										}
 									}
 								}
-							
-							}else {
-	
-							// Open surrounding squares if they do not have a mine nearby
-							// Assign respective numbers if a mine is nearby
-	
-								
-								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = colorBank[0];
-								System.out.println("gridX = " + gridX + "; gridY = " + gridY+"; has "+Boomland.nearbyMines[gridX][gridY]+" nearbyMines");
-								Boomland.neighbors(e,gridX,gridY);
-			
 							}
 						}
 					}
-				}
-							myPanel.repaint();
-							
+				}								
 			}
 					
-			myPanel.repaint();
+			myPanelR.repaint();
 			break;
 		case 3:		//Right mouse button
 			Component cR = e.getComponent();
@@ -199,43 +225,40 @@ public class MyMouseAdapter extends MouseAdapter {
 				}
 			}
 			JFrame myFrameR = (JFrame) cR;
-			MyPanel myPanelR = (MyPanel) myFrameR.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
+			MyPanel myPanelR1 = (MyPanel) myFrameR.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
 			Insets myInsetsR = myFrameR.getInsets();
 			int x1R = myInsetsR.left;
 			int y1R = myInsetsR.top;
 			e.translatePoint(-x1R, -y1R);
 			int xR = e.getX();
 			int yR = e.getY();
-			myPanelR.x = xR;
-			myPanelR.y = yR;
-			int gridXR = myPanelR.getGridX(xR, yR);
-			int gridYR = myPanelR.getGridY(xR, yR);
+			myPanelR1.x = xR;
+			myPanelR1.y = yR;
+			int gridXR1 = myPanelR1.getGridX(xR, yR);
+			int gridYR1 = myPanelR1.getGridY(xR, yR);
 			
-			if(gridYR != 0){
+			
+			
+			
+			
+			
+				if(Boomland.mineList[gridXR1][gridYR1][1]){
+					
+					myPanelR1.colorArray[gridXR1][gridYR1] = Color.WHITE;
+					Boomland.mineList[gridXR1][gridYR1][1] = false;
+					System.out.println("gridX = " + gridXR1 + "; gridY = " + gridYR1 + "; Unflagged!");
+					myPanelR1.repaint();
+					
+				}else{
+					
+				myPanelR1.colorArray[gridXR1][gridYR1] = colorBank[9];
+				Boomland.mineList[gridXR1][gridYR1][1] = true;
+				System.out.println("gridX = " + gridXR1 + "; gridY = " + gridYR1 + "; Flagged!");
+				Boomland.gameWin(e);
+				myPanelR1.repaint();
 				
-				// Flags
-				if(!(Boomland.getGameEnd())){
-				
-					if(myPanelR.colorArray[gridXR][gridYR].equals(Color.WHITE)||myPanelR.colorArray[gridXR][gridYR].equals(Color.RED)){
-						
-						if(Boomland.mineList[gridXR][gridYR][1]){
-							
-							myPanelR.colorArray[gridXR][gridYR] = Color.WHITE;
-							Boomland.mineList[gridXR][gridYR][1] = false;
-							System.out.println("gridX = " + gridXR + "; gridY = " + gridYR + "; Unflagged!");
-							myPanelR.repaint();
-							
-						}else{
-							
-						myPanelR.colorArray[gridXR][gridYR] = colorBank[1];
-						Boomland.mineList[gridXR][gridYR][1] = true;
-						System.out.println("gridX = " + gridXR + "; gridY = " + gridYR + "; Flagged!");
-						myPanelR.repaint();
-						
-						}
-					}
 				}
-			}			
+							
 			break;
 		default:    
 			//Some other button (2 = Middle mouse button, etc.)
