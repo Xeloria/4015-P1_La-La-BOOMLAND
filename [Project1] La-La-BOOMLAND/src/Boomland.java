@@ -27,35 +27,40 @@ public class Boomland extends MouseAdapter{
 	
 	//
 	public static void newGame(){
-			int mineX, mineY;
-			gameEnd = false;
-			
-			//Clearing data
-			for(int i=0;i<9;i++){
-				for(int j=0; j<10;j++){
-					
-					nearbyMines[i][j]=0;
-					
-					for(int k = 0; k<3;k++){
-					mineList[i][j][k]=false;
-					System.out.println("mineList["+i+"]["+j+"]["+k+"] = "+mineList[i][j][k]);
-					}
+		int mineX, mineY;
+		gameEnd = false;
+		
+		//Clearing data
+		for(int i=0;i<9;i++){
+			for(int j=0; j<10;j++){
+				
+				nearbyMines[i][j]=0;
+				
+				for(int k = 0; k<3;k++){
+				mineList[i][j][k]=false;
+				System.out.println("mineList["+i+"]["+j+"]["+k+"] = "+mineList[i][j][k]);
 				}
 			}
-			//Setting up the mines
-			
-			for(int m = 0; m<10; m++){
+		}
+		//Setting up the mines
+		for(int m = 0; m<10; m++){
+			mineX = randNum.nextInt(9);
+			mineY = randNum.nextInt(9)+1;
+			while(mineList[mineX][mineY][0]){
 				mineX = randNum.nextInt(9);
 				mineY = randNum.nextInt(9)+1;
-				mineList[mineX][mineY][0]=true;	
-				System.out.println(mineX+" "+ mineY+" has a mine");
 			}
+			mineList[mineX][mineY][0]=true;	
+			System.out.println("gridX = "+mineX+" gridY = "+ mineY+" has a mine; "+(m+1)+" mines placed");
+			
+		}
+			
 			
 			minesNearby();
 	
 		 System.out.println("New game!");
 	}
-	
+
 	
 	public static void gameWin(MouseEvent e){
 		Component c = e.getComponent();
