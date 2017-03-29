@@ -17,11 +17,8 @@ public class Boomland extends MouseAdapter{
 	
 	private static Random randNum = new Random();
 	private static Boolean gameEnd;
-	private static int neighborX;
-	private static int neighborY;
+	
 	// GETTERS & SETTERS
-		public static int getNeighborX(){return neighborX;}
-		public static int getNeighborY(){return neighborY;}
 		public static Boolean getGameEnd(){return gameEnd;}
 		public static void setGameEnd(Boolean gameEnd) {Boomland.gameEnd = gameEnd;}
 	
@@ -75,8 +72,8 @@ public class Boomland extends MouseAdapter{
 		
 		
 		for(int i=0; i<9;i++){
-			for(int j=0; j<10; j++){
-				if(!mineList[i][j][0]&&mineList[i][j][2]){
+			for(int j=1; j<10; j++){
+				if((!mineList[i][j][0])&&mineList[i][j][2]){
 					openedMines++;
 				}
 			}
@@ -235,15 +232,15 @@ public class Boomland extends MouseAdapter{
 	public static void neighbors(MouseEvent e, int mineX, int mineY){
 		
 		Color[] colorBank = new Color[11];
-		colorBank[0] = new Color(102,178,255);
-		colorBank[1] = Color.CYAN;
-		colorBank[2] = new Color(0,153,0);
-		colorBank[3] = new Color(50, 92, 133);
-		colorBank[4] = new Color(0, 0, 153);
-		colorBank[5] = new Color(175, 70, 0);
-		colorBank[6] = new Color(0, 153, 153);
-		colorBank[7] = new Color(153, 51, 255);
-		colorBank[8] = new Color(153, 0, 76);
+		colorBank[0] = new Color(204,255,255);		//Light Cyan
+		colorBank[1] = new Color(51,153,255);		//Blue
+		colorBank[2] = new Color(102,102,255);		//Indigo
+		colorBank[3] = new Color(255, 255, 102);	//Yellow
+		colorBank[4] = new Color(255, 102, 255);	//Pink	
+		colorBank[5] = new Color(255, 178, 102);	//Orange
+		colorBank[6] = new Color(178, 102, 255);	//Purple
+		colorBank[7] = new Color(204,255,153);		//Lime	
+		colorBank[8] = new Color(102, 0, 51);		//Dark Magenta
 		colorBank[9] = Color.RED;					
 		colorBank[10] = Color.BLACK;
 		

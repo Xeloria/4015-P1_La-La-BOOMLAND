@@ -96,15 +96,15 @@ public class MyMouseAdapter extends MouseAdapter {
 		
 		
 		Color[] colorBank = new Color[11];
-		colorBank[0] = new Color(102,178,255);
-		colorBank[1] = Color.CYAN;
-		colorBank[2] = new Color(0,153,0);
-		colorBank[3] = new Color(50, 92, 133);
-		colorBank[4] = new Color(0, 0, 153);
-		colorBank[5] = new Color(175, 70, 0);
-		colorBank[6] = new Color(0, 153, 153);
-		colorBank[7] = new Color(153, 51, 255);
-		colorBank[8] = new Color(153, 0, 76);
+		colorBank[0] = new Color(204,255,255);		//Light Cyan
+		colorBank[1] = new Color(51,153,255);		//Blue
+		colorBank[2] = new Color(102,102,255);		//Indigo
+		colorBank[3] = new Color(255, 255, 102);	//Yellow
+		colorBank[4] = new Color(255, 102, 255);	//Pink	
+		colorBank[5] = new Color(255, 178, 102);	//Orange
+		colorBank[6] = new Color(178, 102, 255);	//Purple
+		colorBank[7] = new Color(204,255,153);		//Lime	
+		colorBank[8] = new Color(102, 0, 51);		//Dark Magenta
 		colorBank[9] = Color.RED;					
 		colorBank[10] = Color.BLACK;
 			
@@ -171,7 +171,7 @@ public class MyMouseAdapter extends MouseAdapter {
 									
 										if(Boomland.mineList[gridXR][gridYR][0]){
 											myPanelR.colorArray[4][0]=Color.RED;
-											myPanelR.colorArray[myPanelR.mouseDownGridX][myPanelR.mouseDownGridY] = colorBank[2];
+											myPanelR.colorArray[myPanelR.mouseDownGridX][myPanelR.mouseDownGridY] = colorBank[10];
 											//Boomland.mineList[gridX][gridY][2]=true;
 											System.out.println("gridX = " + gridXR + "; gridY = " + gridYR + "; You hit a Mine!");
 							
@@ -192,6 +192,7 @@ public class MyMouseAdapter extends MouseAdapter {
 				
 											
 											myPanelR.colorArray[gridXR][gridYR]=colorBank[Boomland.nearbyMines[gridXR][gridYR]];
+											Boomland.mineList[gridXR][gridYR][2]=true;
 											System.out.println("gridX = " + gridXR + "; gridY = " + gridYR+"; has "+Boomland.nearbyMines[gridXR][gridYR]+" nearbyMines");
 											Boomland.neighbors(e,gridXR,gridYR);
 											
@@ -200,11 +201,8 @@ public class MyMouseAdapter extends MouseAdapter {
 													if(!Boomland.mineList[i][j][0]&&Boomland.mineList[i][j][2])
 																myPanelR.colorArray[i][j]=colorBank[Boomland.nearbyMines[i][j]];
 																
-												}
-												
+												}									
 											}
-											Boomland.gameWin(e);
-											
 										}
 									}
 								}
@@ -213,7 +211,7 @@ public class MyMouseAdapter extends MouseAdapter {
 					}
 				}								
 			}
-					
+			Boomland.gameWin(e);		
 			myPanelR.repaint();
 			break;
 		case 3:		//Right mouse button
@@ -242,7 +240,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			
 			
 			
-				if(Boomland.mineList[gridXR1][gridYR1][1]){
+				if(Boomland.mineList[gridXR1][gridYR1][1]&&!Boomland.getGameEnd()){
 					
 					myPanelR1.colorArray[gridXR1][gridYR1] = Color.WHITE;
 					Boomland.mineList[gridXR1][gridYR1][1] = false;
@@ -250,13 +248,14 @@ public class MyMouseAdapter extends MouseAdapter {
 					myPanelR1.repaint();
 					
 				}else{
+					if(!Boomland.mineList[gridXR1][gridYR1][2]&&!Boomland.getGameEnd()){
 					
-				myPanelR1.colorArray[gridXR1][gridYR1] = colorBank[9];
-				Boomland.mineList[gridXR1][gridYR1][1] = true;
-				System.out.println("gridX = " + gridXR1 + "; gridY = " + gridYR1 + "; Flagged!");
-				Boomland.gameWin(e);
-				myPanelR1.repaint();
-				
+						myPanelR1.colorArray[gridXR1][gridYR1] = colorBank[9];
+						Boomland.mineList[gridXR1][gridYR1][1] = true;
+						System.out.println("gridX = " + gridXR1 + "; gridY = " + gridYR1 + "; Flagged!");
+						Boomland.gameWin(e);
+						myPanelR1.repaint();
+					}
 				}
 							
 			break;
