@@ -87,7 +87,7 @@ public class Boomland extends MouseAdapter{
 			}
 		}
 		
-		if(openedMines==71||flaggedMines==10){
+		if(openedMines==71&&flaggedMines==10){
 			myPanel.colorArray[4][0]=Color.BLUE;
 			gameEnd = true;
 			System.out.println("You won!");
@@ -697,24 +697,7 @@ public class Boomland extends MouseAdapter{
 					return;
 			}
 			
-			
-		
-		
-			
-				
 		}
 				
-			}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	}
 	
-
-		
