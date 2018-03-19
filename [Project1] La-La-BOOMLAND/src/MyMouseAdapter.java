@@ -13,6 +13,7 @@ public class MyMouseAdapter extends MouseAdapter {
 
 
 	public void mousePressed(MouseEvent e) {
+		try {
 		switch (e.getButton()) {
 		case 1:		//Left mouse button
 			Component c = e.getComponent();
@@ -88,6 +89,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			//Do nothing
 			break;
 		}
+	}catch(Exception exc) {/*User clicked outside the grid; do nothing.*/}
 }
 	
 	
@@ -111,7 +113,7 @@ public class MyMouseAdapter extends MouseAdapter {
 		
 		
 		
-		
+		try {
 
 		switch (e.getButton()) {
 		case 1:		//Left mouse button
@@ -264,6 +266,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			//Do nothing
 			break;
 		}
+		}catch(Exception exc) {/*User clicked outside the grid; do nothing.*/}
 	}
 }
 
